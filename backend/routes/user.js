@@ -83,8 +83,13 @@ router.put("/UpdateDetails",updateWare,authMiddleware, async (req, res) => {
                 if(err){
                     console.log('Error hashing password :',err);
                 }
-                req.Password = hash
-	            const a = await UserLogin.updateOne({ _id: req.userId }, req.body);
+                // console.log(req.body)
+                req.body.Password = hash
+                // // console.log(req.body);
+                // console.log(req.userID)
+
+	            const a = await UserLogin.updateOne({ _id:req.userID }, req.body);
+               
                 if(a){
                     res.status(200).json({
                         message: "Updated successfully"

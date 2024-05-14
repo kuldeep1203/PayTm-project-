@@ -69,13 +69,13 @@ const authMiddleware = (req, res, next) => {
     
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-
-        req.Email = decoded.Email;
+        // console.log(decoded);
+        req.userID = decoded.userID;
         // console.log(userId);
         next();
     } catch (err) {
         console.log(err)
-        return res.status(403).json({msg :"error"});
+        return res.status(403).json({msg :"Session Expired "});
     }
 };
 
