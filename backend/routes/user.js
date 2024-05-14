@@ -77,11 +77,28 @@ router.put("/UpdateDetails",updateWare,authMiddleware, async (req, res) => {
     
         // console.log(payload)
     // const  ExistUser  = await UserLogin.findOne({Email:payload.Email})
-	await UserLogin.updateOne({ _id: req.userId }, req.body);
+    if(req.body){
+        if(req.body.Password){
+            bcrypt.hash(req.body.Password,10,async (err,hash) => {
+                if(err){
+                    console.log('Error hashing password :',err);
+                }
+                req.Password = hash
+	            const a = await UserLogin.updateOne({ _id: req.userId }, req.body);
+                if(a){
+                    res.status(200).json({
+                        message: "Updated successfully"
+                    })
+                }
+                else{
+                    res.status(411).json({msg:"failed to create"})
+                }
+            })
+            
+        }
+    }
 	
-    res.json({
-        message: "Updated successfully"
-    })
+   
 })
 
  
