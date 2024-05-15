@@ -29,15 +29,21 @@ const signup = zod.object({
     Password: zod.string().min(8)
 });
 
+
 const signin = zod.object({
     Email : zod.string().email(),
     Password: zod.string().min(8)
 })
+
 const updateBody = zod.object({
 	password: zod.string().optional(),
     firstName: zod.string().optional(),
     lastName: zod.string().optional(),
 });
+
+
+
+
 module.exports = {
     signup: signup,
     sigin : signin,

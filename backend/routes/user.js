@@ -106,7 +106,37 @@ router.put("/UpdateDetails",updateWare,authMiddleware, async (req, res) => {
    
 })
 
+
+router.delete("/UserDelete",authMiddleware,async (req,res) =>{
+    await UserLogin.deleteOne({_id:req.userID})
+    res.status(411).json({msg:"deleted successfully"})
+})
  
+
+
+router.get("/UserDetails",async(req,res) =>{
+    const filter = req.query.filter || "";
+    // console.log(filter)
+
+    const regexFilter = new RegExp(`^${filter}`,"i");
+    const users = await UserLogin.find({
+        $or: [{
+            FirstName: {$regex : regexFilter}
+        }, {
+
+            LastName: {$regex : regexFilter}
+        }]
+    })
+    // console.log(users);
+    res.json({
+        user: users.map(user => ({
+            Email : user.Email,
+            FirstName: user.FirstName,
+            LastName: user.LastName,
+            _id: user._id
+        }))
+    })
+})
 
 
 
