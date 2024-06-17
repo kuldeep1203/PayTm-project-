@@ -6,12 +6,12 @@ const en = require('dotenv')
 en.config()
 app.use(express.json());
 app.use(cors());
-const rootRouter = require("C:\\Users\\kulu1\\Desktop\\Everything\\PaytmClone\\backend\\routes\\index.js");
-const port =3000;
+const rootRouter = require("./routes/index");
+
 app.use("/api/v1", rootRouter);
 
 
 
-app.listen(port,()=>{
+app.listen(process.env.PORT,()=>{
     console.log('listening on port')
 });

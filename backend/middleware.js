@@ -1,7 +1,7 @@
 
-const { signup, sigin, updateBody } = require('C:\\Users\\kulu1\\Desktop\\Everything\\PaytmClone\\backend\\types.js');
-const {UserLogin} =  require('C:\\Users\\kulu1\\Desktop\\Everything\\PayTmClone\\backend\\config\\db.js');
-const { JWT_SECRET } = require("C:\\Users\\kulu1\\Desktop\\Everything\\PaytmClone\\backend\\config\\config.js");
+const { signup, sigin, updateBody } = require('./types');
+const {UserLogin} =  require('./config/db');
+const { JWT_SECRET } = require('./config/config');
 const jwt = require("jsonwebtoken");
 
 function signupware(req, res, next) {

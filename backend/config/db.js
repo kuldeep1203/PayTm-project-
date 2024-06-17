@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://kuldeep:simon@cluster0.ygqebfp.mongodb.net/Paytm').then(()=>console.log("connected"));
+const en = require('dotenv')
+
+en.config()
+// console.log(process.env.PATH)
+mongoose.connect(process.env.URI).then(()=>console.log("connected"));
 
 const userLoginSchema = mongoose.Schema({
     FirstName : String,
