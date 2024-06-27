@@ -1,8 +1,14 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
+// eslint-disable-next-line no-undef
 const { signup, sigin, updateBody } = require('./types');
 const {UserLogin} =  require('./config/db');
 const { JWT_SECRET } = require('./config/config');
 const jwt = require("jsonwebtoken");
+
+
+
 
 function signupware(req, res, next) {
     const payload = req.body;

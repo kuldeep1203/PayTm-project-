@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // backend/api/index.js
 const express = require('express');
 const userRouter = require("./user.js");
