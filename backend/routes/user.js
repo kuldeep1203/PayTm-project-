@@ -1,7 +1,7 @@
 // backend/routes/user.js
 const express = require('express');
-const {signupware,existingUser,signinware, updateWare, authMiddleware} = require('C:\\Users\\kulu1\\Desktop\\Everything\\PayTmClone\\backend\\middleware.js')
-const { UserLogin } =  require('C:\\Users\\kulu1\\Desktop\\Everything\\PayTmClone\\backend\\config\\db.js')
+const {signupware,existingUser,signinware, updateWare, authMiddleware} = require('backend/middleware.js')
+const { UserLogin } =  require('./config/db')
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-undef
 const { signup, sigin, updateBody } = require('./types');
 const {UserLogin} =  require('./config/db');
-const { JWT_SECRET } = require('./config/config');
+const { JWT_SECRET } = require('backend/config/config');
 const jwt = require("jsonwebtoken");
 
 
