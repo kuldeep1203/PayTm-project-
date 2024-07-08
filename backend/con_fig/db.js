@@ -31,6 +31,6 @@ const UserLogin =mongoose.model('UserLogin',userLoginSchema);
 const UserTran = mongoose.model('UserTran',UserTransaction);
 
 module.exports = {
-    UserLogin : UserLogin,
+    UserLogin,
     UserTran
 }
