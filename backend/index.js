@@ -7,8 +7,10 @@ en.config()
 app.use(express.json());
 app.use(cors());
 const rootRouter = require("./routes/index");
+const transactionRouter = require("./routes/account");
 
 app.use("/api/v1", rootRouter);
+
 
 
 

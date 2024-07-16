@@ -1,7 +1,7 @@
 // backend/routes/user.js
 const express = require('express');
 const {signupware,existingUser,signinware, updateWare, authMiddleware} = require('../middleware.js')
-const { UserLogin } =  require('../con_fig/db.js')
+const { UserLogin,UserTran } =  require('../con_fig/db.js')
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -22,6 +22,11 @@ router.post("/signup",signupware,existingUser,async function (req, res) {
         LastName,
         Email,
         Password:hash
+    })
+    //also intialize the balance from 0-10000 randomly
+    const b = await UserTran.create({
+        userId : a._id,
+        balance : Math.floor(Math.random() * 10000)
     })
     if(a){
         const userID = a._id;//object id in mongo
