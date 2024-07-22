@@ -8,6 +8,14 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../con_fig/config.js");
 
 
+// router.get("/testFiter",authMiddleware,async(req,res)=>{
+//     const id = req.userID;
+//     console.log(id);
+//     const a = await UserLogin.findOne({_id:id});
+//     res.json(a);
+// })
+
+
 router.post("/signup",signupware,existingUser,async function (req, res) {
     const FirstName  = req.body.FirstName
     const LastName = req.body.LastName
@@ -24,10 +32,16 @@ router.post("/signup",signupware,existingUser,async function (req, res) {
         Password:hash
     })
     //also intialize the balance from 0-10000 randomly
-    const b = await UserTran.create({
-        userId : a._id,
-        balance : Math.floor(Math.random() * 10000)
-    })
+    try{
+        const b = await UserTran.create({
+            userId: a._id,
+            balance: Math.floor(Math.random() * 10000)
+        })
+    }
+    catch(err){
+        console.error(err);
+    }
+   
     if(a){
         const userID = a._id;//object id in mongo
         const token = jwt.sign({userID},JWT_SECRET);

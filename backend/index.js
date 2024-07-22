@@ -10,7 +10,7 @@ const rootRouter = require("./routes/index");
 const transactionRouter = require("./routes/account");
 
 app.use("/api/v1", rootRouter);
-
+app.use("/api/v1", transactionRouter);
 
 
 
