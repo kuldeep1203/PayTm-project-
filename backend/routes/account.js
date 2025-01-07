@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 
 router.get("/balance",authMiddleware ,async (req, res) => { 
     try{
-        const a = await UserTran.findOne({ userId: req.userID });
+        //console.log(req.userId)
+        const a = await UserTran.findOne({ userId: req.userId });
         if (a) {
             res.status(200).json({ balance: a.balance })
         }

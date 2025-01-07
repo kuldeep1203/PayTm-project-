@@ -1,25 +1,27 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 export default function Signup() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useNavigate();
+    // const history = useNavigate();
     const handleSubmit = async(event)=>{
         event.preventDefault(); // prevents default submission of the form 
         try {
-            await axios.post('http://127.0.0.1:3000/api/v1/user/signup', {
+            const response = await axios.post('http://127.0.0.1:3000/api/v1/user/signup', {
                "FirstName":firstName,
                 "LastName": lastName,
                 "Email": email,
                 "Password": password
 
             });
+            localStorage.setItem('token', response.data.token);
+
             alert('Signup Successful! Redirecting to login...');
             setTimeout(()=>{
-                history('/Dashboard');
+                window.location.href = '/Dashboard';
             },2000)
             
         } catch (error) {

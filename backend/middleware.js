@@ -62,7 +62,7 @@ function signinware(req, res,next){
 
 
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async(req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -70,14 +70,14 @@ const authMiddleware = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1];
-    // console.log(token);
+    //console.log(token);
     // console.log(JWT_SECRET)
     
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log(decoded);
-        req.userID = decoded.userID;
-        // console.log(userId);
+        //console.log(decoded);
+        req.userId = decoded.userId;
+        //console.log(decoded.userId);
         next();
     } catch (err) {
         console.log(err)

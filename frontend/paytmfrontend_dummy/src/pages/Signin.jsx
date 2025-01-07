@@ -9,12 +9,15 @@ export default function Signin() {
     const handleSubmit = async(event)=>{
         event.preventDefault(); // prevents default submission of the form 
         try {
-            await axios.post('http://127.0.0.1:3000/api/v1/user/signin',{
+            const response =  await axios.post('http://127.0.0.1:3000/api/v1/user/signin',{
                 "Email": email,
                 "Password": password
 
             })
             alert('Signin Successful! ');
+            //console.log(response.data.token);
+            localStorage.setItem('token', response.data.token);
+            
             setTimeout(()=>{
                 history('/Dashboard');
             },500)

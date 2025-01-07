@@ -77,7 +77,7 @@ router.post("/signin",signinware,async (req,res,next) => {
         }
         else{
             const token = jwt.sign({ 
-                userId : ExistUser._id
+                userId : ExistUser.userId
             },JWT_SECRET);
     
     
@@ -133,7 +133,7 @@ router.delete("/UserDelete",authMiddleware,async (req,res) =>{
  
 
 
-router.get("/UserDetails",async(req,res) =>{
+router.get("/UserDetails",authMiddleware,async(req,res) =>{
     const filter = req.query.filter || "";
     // console.log(filter)
 
@@ -146,14 +146,18 @@ router.get("/UserDetails",async(req,res) =>{
             LastName: {$regex : regexFilter}
         }]
     })
+    const currentUser = users.find(user=>user._id.toString()===req.userId);
     // console.log(users);
     res.json({
-        user: users.map(user => ({
-            Email : user.Email,
-            FirstName: user.FirstName,
-            LastName: user.LastName,
-            _id: user._id
-        }))
+        user: users.filter(user => user._id!==currentUser._id),
+        currentUser: currentUser
+            ? {
+                Email: currentUser.Email,
+                FirstName: currentUser.FirstName,
+                LastName: currentUser.LastName,
+                _id: currentUser._id,
+            }
+            : null
     })
 })
 
