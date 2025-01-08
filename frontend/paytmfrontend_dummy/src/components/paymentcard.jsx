@@ -1,8 +1,8 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import axios from 'axios';
 const Modal = ({ isOpen, closeModal, userDetail }) => {
     if (!isOpen) return null; 
-
+    const [amount,setAmount]=useState(0);
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-96 h-auto relative">
@@ -33,6 +33,11 @@ const Modal = ({ isOpen, closeModal, userDetail }) => {
                         Amount (in Rs)
                     </label>
                     <input
+
+                        onChange={(e)=>{
+                            setAmount(e.target.value);                        
+                        }}
+
                         type="number"
                         id="amount"
                         placeholder="Enter amount"
@@ -46,8 +51,20 @@ const Modal = ({ isOpen, closeModal, userDetail }) => {
                     >
                         Cancel
                     </button>
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        onClick={()=>{
+                            axios.post("http://localhost:3000/api/v1/account/transferBalance",{
+                                to:userDetail,
+                                amount
+                            },{
+                                headers:{
+                                    Authorization:"Bearer "+localStorage.getItem("token")
+                                }
+                            })
+                        }}
+                        >
                         Confirm
+                        
                     </button>
                 </div>
             </div>
