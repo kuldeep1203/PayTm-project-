@@ -77,7 +77,7 @@ router.post("/signin",signinware,async (req,res,next) => {
         }
         else{
             const token = jwt.sign({ 
-                userId : ExistUser.userId
+                userId : ExistUser._id
             },JWT_SECRET);
     
     
@@ -146,8 +146,10 @@ router.get("/UserDetails",authMiddleware,async(req,res) =>{
             LastName: {$regex : regexFilter}
         }]
     })
-    const currentUser = users.find(user=>user._id.toString()===req.userId);
-    // console.log(users);
+    console.log(req.userId)
+    const currentUser = users.find(user => user._id.toString() === req.userId);
+     console.log(currentUser);
+    //console.log(currentUser)
     res.json({
         user: users.filter(user => user._id!==currentUser._id),
         currentUser: currentUser

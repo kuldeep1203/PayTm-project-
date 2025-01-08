@@ -70,7 +70,7 @@ export default function Dashboard() {
                     <div className='text-lg font-bold'>
                         Users 
                     </div>
-                    <SearchComponent className="mt-6"/>
+                    <SearchComponent className="mt-6" userDetails={results}/>
                     <UserListComponent userDetails={results}/>
                     
                 </div>
